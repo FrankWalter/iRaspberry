@@ -1,0 +1,8 @@
+{
+    "access_token": "24.4d6e1ff797005ad2d5ede0be5de0b131.2592000.1450878473.282335-7299565",
+    "session_key": "9mzdD0AToYUAlt88HbxdQfh7DmFq6DNcwtmIJ4GCGgSrdIvnUIWCO2/1UCPLiE6kf8ab1fMi6FkHMhpj62jVdRT0+7Uq",
+    "scope": "public audio_tts_post wise_adapt lebo_resource_base lightservice_public hetu_basic lightcms_map_poi",
+    "refresh_token": "25.30778d9cc4de3a22176d603410855a81.315360000.1763646473.282335-7299565",
+    "session_secret": "c32fd1a0f167398ec45ff9c759f25ec8",
+    "expires_in": 2592000
+}
