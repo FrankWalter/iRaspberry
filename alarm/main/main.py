@@ -1,12 +1,12 @@
 # coding=utf8
 import pygame
 import sys
+sys.path.append('..')
 from pygame.locals import *
-
 from Robot.robot import *
 
-screenHight = 500
-screenWidth = 500
+screenHight = 200
+screenWidth = 200
 def sleep_by_counter(threshold):
     i = 0;
     while i < threshold:
