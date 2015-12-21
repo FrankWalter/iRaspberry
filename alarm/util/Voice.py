@@ -1,4 +1,5 @@
 import urllib
+
 def speak(sentence):
     url = "http://tsn.baidu.com/text2audio?tex="\
           +sentence\
