@@ -11,9 +11,6 @@ from Robot.robot import *
 screenHight = 350
 screenWidth = 475
 
-def terminate():
-    pygame.quit()
-    sys.exit()
 def initScreen():
     #force the screen to be displayed in full window
     os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (0,0)
@@ -28,6 +25,8 @@ if __name__=='__main__':
     while True:
         for event in pygame.event.get():
             if event.type == QUIT:
-                terminate()
+                print "quit!"
+                pygame.quit()
+                sys.exit()
     #rob.speak("肥料掺了金坷垃一带能顶两袋撒")
 

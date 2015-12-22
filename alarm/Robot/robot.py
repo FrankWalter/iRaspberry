@@ -1,9 +1,9 @@
 import pygame
-import main
 import random
 import thread
 import time
 import util.voice
+import sys
 faceIndex = ('smile', 'smile2', 'angry', 'contempt', 'crafty', 'cute'\
              , 'love', 'shy', 'threaten')
 Faces = {'smile':'smile', 'smile2': 'smile2', 'angry':'angry', \
@@ -30,12 +30,19 @@ class robot():
         self.buttonSize = self.screenWidth / 6
         self.loadImg()
 
-        self.faceOrWeather = 0 #decide what to display
-                               # 0 stands for face and 1 stands for weather
+        self.Func = 0
+        #decide what action to perform
+        # 0 stands for feed
+        # 1 stands for pet
+        # 2 stands for punish
+        # 3 stands for alarm
+        # 4 stands for music
+        # 5 stands for news
+        # 6 stands for weather
+
         try :
-            thread.start_new_thread(self.display, ())
+            thread.start_new_thread(self.performFunc, ())
             thread.start_new_thread(self.bottonListener(), ())
-            # thread.start_new_thread(self.mood, ())
         except Exception as err:
             print err
 
@@ -70,17 +77,46 @@ class robot():
         self.weatherImg = pygame.image.load('../resources/img/' + self.weather + '.png').convert()
         self.weatherImg = pygame.transform.scale(self.weatherImg, (self.screenWidth, self.screenHight))
 
-    def display(self):
+    def performFunc(self):
         location = [0, 0]
         while True:
-            if self.faceOrWeather == 0:
+            if self.Func == 0:
                 self.screen.blit(self.faceImg, location)
                 self.displayButtons()
-            elif self.faceOrWeather == 1:
+                self.feedMe()
+
+            elif self.Func == 1:
                 self.screen.blit(self.weatherImg, location)
-            elif self.faceOrWeather == 2:
+                self.displayButtons()
+                self.petMe()
+
+            elif self.Func == 2:
+                self.screen.blit(self.weatherImg, location)
+                self.displayButtons()
+                self.punishMe()
+
+            elif self.Func == 3:
                 self.displayClock()
+
+            elif self.Func == 4:
+                self.displayPlayer()
+
+            elif self.Func == 5:
+                self.displayNews()
+
+            elif self.Func == 6:
+                self.displayWeather()
+
             pygame.display.flip()
+
+    def feedMe(self):
+        print "feed"
+
+    def petMe(self):
+        print "pet"
+
+    def punishMe(self):
+        print "punish"
 
     def displayButtons(self):
         stepHori = self.screenWidth / 20
@@ -116,20 +152,90 @@ class robot():
             pygame.draw.circle(self.screen, [205, 0, 0], location31, self.screenWidth / 45)
             pygame.draw.circle(self.screen, [205, 0, 0], location32, self.screenWidth / 45)
 
+    def displayPlayer(self):
+        self.screen.fill([255, 255, 255])
+        stepHori = self.screenWidth / 20
+        stepVert = self.screenHight / 20
+        location1 = [0, stepVert * 5]
+        location2 = [stepHori * 5, stepVert * 5]
+        location31 = [stepHori / 4 * 40, stepVert * 6]
+        location32 = [stepHori / 4 * 40,  stepVert * 8]
+        location4 = [stepHori * 10, stepVert * 5]
+        location5 = [stepHori * 15, stepVert * 5]
+        now = time.localtime()
+        hour = now.tm_hour
+        minute = now.tm_min
+        second = now.tm_sec
+        self.screen.blit(self.number[hour / 10], location1)
+        self.screen.blit(self.number[hour % 10], location2)
+        self.screen.blit(self.number[minute / 10], location4)
+        self.screen.blit(self.number[minute % 10], location5)
+
+        if second % 2 == 0:
+            pygame.draw.circle(self.screen, [205, 0, 0], location31, self.screenWidth / 45)
+            pygame.draw.circle(self.screen, [205, 0, 0], location32, self.screenWidth / 45)
+
+    def displayNews(self):
+        self.screen.fill([255, 255, 255])
+        stepHori = self.screenWidth / 20
+        stepVert = self.screenHight / 20
+        location1 = [0, stepVert * 5]
+        location2 = [stepHori * 5, stepVert * 5]
+        location31 = [stepHori / 4 * 40, stepVert * 6]
+        location32 = [stepHori / 4 * 40,  stepVert * 8]
+        location4 = [stepHori * 10, stepVert * 5]
+        location5 = [stepHori * 15, stepVert * 5]
+        now = time.localtime()
+        hour = now.tm_hour
+        minute = now.tm_min
+        second = now.tm_sec
+        self.screen.blit(self.number[hour / 10], location1)
+        self.screen.blit(self.number[hour % 10], location2)
+        self.screen.blit(self.number[minute / 10], location4)
+        self.screen.blit(self.number[minute % 10], location5)
+
+        if second % 2 == 0:
+            pygame.draw.circle(self.screen, [205, 0, 0], location31, self.screenWidth / 45)
+            pygame.draw.circle(self.screen, [205, 0, 0], location32, self.screenWidth / 45)
+
+    def displayWeather(self):
+        self.screen.fill([255, 255, 255])
+        stepHori = self.screenWidth / 20
+        stepVert = self.screenHight / 20
+        location1 = [0, stepVert * 5]
+        location2 = [stepHori * 5, stepVert * 5]
+        location31 = [stepHori / 4 * 40, stepVert * 6]
+        location32 = [stepHori / 4 * 40,  stepVert * 8]
+        location4 = [stepHori * 10, stepVert * 5]
+        location5 = [stepHori * 15, stepVert * 5]
+        now = time.localtime()
+        hour = now.tm_hour
+        minute = now.tm_min
+        second = now.tm_sec
+        self.screen.blit(self.number[hour / 10], location1)
+        self.screen.blit(self.number[hour % 10], location2)
+        self.screen.blit(self.number[minute / 10], location4)
+        self.screen.blit(self.number[minute % 10], location5)
+
+        if second % 2 == 0:
+            pygame.draw.circle(self.screen, [205, 0, 0], location31, self.screenWidth / 45)
+            pygame.draw.circle(self.screen, [205, 0, 0], location32, self.screenWidth / 45)
+
     def speak(self, sentence):
         util.voice.speak(sentence)
-
-    def mood(self):
-        while True:
-            time.sleep(2)
-            self.faceOrWeather = (self.faceOrWeather + 1) % 3
 
 
     def bottonListener(self):
         while True:
             for event in pygame.event.get():
-                if event.type == pygame.MOUSEBUTTONDOWN and self.buttons[0][1][0]<= event.pos[0] <= self.buttons[0][1][0] + self.buttonSize:
-                    print "click!"
+                for i in range(0, len(self.buttons)):
+                    if self.Func == event.type == pygame.MOUSEBUTTONDOWN and self.buttons[i][1][0]<= event.pos[0] <= self.buttons[i][1][0] + self.buttonSize and self.buttons[i][1][1]<= event.pos[1] <= self.buttons[i][1][1] + self.buttonSize:
+                        print "click!%d" %i
+                        self.Func = i
+                    elif event.type == pygame.QUIT:
+                        print "quit!"
+                        pygame.quit()
+                        sys.exit()
 
 
 
