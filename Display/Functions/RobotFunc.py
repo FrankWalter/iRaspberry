@@ -2,23 +2,19 @@ import pygame
 import random
 import thread
 import time
-import util.voice
-import util.weather
+import Util.voice
+import Util.weather
 import sys
 Faces = ('smile', 'smile2', 'angry', 'contempt', 'crafty', 'cute'\
              , 'love', 'shy', 'threaten')
 
-Weathers = util.weather.weatherSet
-Buttons = ("feed", "pet", "punish", "alarm", "music", "news",   "weather", "return")
-
-Funcs = {'Alarm': 3, 'Music': 4, 'News': 5, 'Weather': 6, 'Face': 7}
+Weathers = Util.weather.weatherSet
 
 Treats = {'Notreat': 0, 'Feed': 1, 'Pet': 2, 'Punish': 3}
 
 ISOTIMEFORMAT="%Y-%m-%d %X"
 
-class robot():
-
+class RobotFunc():
     def __init__(self, screen):
         self.screen = screen
         self.numbers = []
@@ -205,20 +201,7 @@ class robot():
         util.voice.speak(sentence)
 
 
-    def bottonListener(self):
-        while True:
-            for event in pygame.event.get():
-                if event.type == pygame.MOUSEBUTTONDOWN and self.Func == Funcs['Face']:
-                    for i in range(0, len(self.buttons)):
-                        if self.buttons[i][1][0] <= event.pos[0] <= self.buttons[i][1][0] + self.buttonSize and self.buttons[i][1][1]<= event.pos[1] <= self.buttons[i][1][1] + self.buttonSize:
-                            if i >= 3:
-                                self.Func = i
-                            else:
-                                self.Treat = i + 1
-                elif event.type == pygame.QUIT:
-                    print "quit!"
-                    pygame.quit()
-                    sys.exit()
+
 
 
 
