@@ -4,7 +4,7 @@ from pprint import pprint
 
 city = ""
 apikey = ""
-
+weatherSet = {'sunny': 'sunny', 'cloudy': 'cloudy', 'overcast': 'overcast', 'rain': 'rain', 'snow': 'snow', 'fog': 'fog'}
 # input : 
 # output : string 
 # weather set : 
@@ -19,18 +19,16 @@ def getWeather():
 	oResp = json.loads(resp.read())
 	oRetData = oResp['retData']
 	weather = oRetData['weather'].encode('utf-8')
-	print weather
 	if "晴" in weather :
-		return "sunny" 
+		return weatherSet['sunny']
 	elif "雾" == weather:
-		return "fog"
+		return weatherSet['fog']
 	elif "阴" == weather: 
-		return "overcast"
+		return weatherSet['overcast']
 	elif "雨" in  weather: 
-		return "rain"
+		return weatherSet['rain']
 	elif "雪" in weather: 
-		return "snow"
+		return weatherSet['snow']
 	else:
-		return "cloudy"
-	
-getWeather()
+		return weatherSet["cloudy"]
+
