@@ -1,9 +1,9 @@
 import pygame
 import threading
 class Displayer(threading.Thread):
-    def __init__(self, screen, elems):
+    def __init__(self, context, elems):
         threading.Thread.__init__(self)
-        self.screen = screen
+        self.screen = context.screen
         self.elems = elems
 
     def run(self):

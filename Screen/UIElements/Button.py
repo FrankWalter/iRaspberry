@@ -9,16 +9,16 @@ class Button(UIElement):
         self.img = pygame.transform.scale(pygame.image.load('Resources/img/buttons/' + self.name.lower() + '.png').convert(), (self.width, self.height))
 
 #Factory Method
-def CreateButtonDict(screen, Funcs):
-    height = screen.get_height() / 6
-    width = screen.get_width() / 6
+def CreateButtonDict(screenSize, Funcs):
+    width = screenSize[0] / 6
+    height = screenSize[1] / 6
     return dict(map(lambda x:
-                    (x, Button(x, Funcs[x], None, getButtonLocation(screen, Funcs[x]), width, height, True))
+                    (x, Button(x, Funcs[x], None, getButtonLocation(screenSize, Funcs[x]), width, height, True))
                     , Funcs.keys()))
 
-def getButtonLocation(screen, buttonIndex):
-    screenWidth = screen.get_width()
-    screenHeight = screen.get_height()
+def getButtonLocation(screenSize, buttonIndex):
+    screenWidth = screenSize[0]
+    screenHeight = screenSize[1]
     stepHori = screenWidth / 20
     stepVert = screenHeight / 20
     if 3 <= buttonIndex <= 7:

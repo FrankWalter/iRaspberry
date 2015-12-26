@@ -5,22 +5,20 @@ from NewsFunc import *
 from MusicFunc import *
 from UIElements.Button import *
 from UIElements.Background import *
+from UIElements.Dicts import *
 class FuncHandler():
-    Funcs = {'Alarm': 3, 'Music': 4, 'News': 5, 'Weather': 6, 'Face': 7}
-    def __init__(self, screen, displayer):
-        self.screen = screen
-        self.Funcs = self.Funcs
-        self.displayer = displayer
-        # self.Backgrounds = Backgrounds
-
-        self.buttonDict = CreateButtonDict(screen, self.Funcs)
-        self.displayer.addDict(self.buttonDict)
+    Funcs = FuncsButtonDict
+    def __init__(self, context):
+        # the function layer may should not aware of the screen layer, but we
+        # need the screenSize for evenListening
+        self.buttonDict = CreateButtonDict(context.getScreenSize(), self.Funcs)
+        context.addDictForDisplay(self.buttonDict)
         #
         # self.backgroundDict = CreateBGDict(screen, self.Backgrounds)
         # self.displayer.addDict(self.backgroundDict)
 
-        self.robotFunc = RobotFunc(screen, self.displayer)
-        self.clockFunc = ClockFunc(screen, self.displayer)
+        self.robotFunc = RobotFunc(context)
+        self.clockFunc = ClockFunc(context)
         # self.NewsFunc = NewsFunc(screen, self.displayer)
 
 

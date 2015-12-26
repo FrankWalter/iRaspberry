@@ -12,5 +12,3 @@ class UIElement():
         self.active = active
     @abstractmethod
     def loadImg(self):pass
-    @abstractmethod
-    def allocImg(self):pass
