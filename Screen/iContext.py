@@ -20,3 +20,5 @@ class iContext():
         return self.funcHdl
     def addDictForDisplay(self, ddict):
         self.displayer.addDict(ddict)
+    def addElemForDisplay(self, elem):
+        self.displayer.addElem(elem)

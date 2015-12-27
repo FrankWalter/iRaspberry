@@ -8,25 +8,34 @@ class ClockFunc(threading.Thread):
     ClockNumbers = ClockNumberDict
     def __init__(self, context):
         threading.Thread.__init__(self)
-        # stepHori = self.screenWidth / 20
+        # stepHori = self.screenWidth / 20        self.loadImg()
+
         # stepVert = self.screenHight / 20
         # location31 = [stepHori / 4 * 40, stepVert * 6]
         # location32 = [stepHori / 4 * 40,  stepVert * 8]
 
         self.now = time.localtime()
-        hour = now.tm_hour
-        minute = now.tm_min
-        second = now.tm_sec
+        self.hour =  self.now.tm_hour
+        self.minute =  self.now.tm_min
+        self.second =  self.now.tm_sec
 
-        self.numberDict = CreateClockNumberDict(context.getScreenSize(), self.ClockNumbers, (hour / 10, hour % 10, minute / 10, minute % 10))
+        self.numberDict = CreateClockNumberDict(context.getScreenSize(), self.ClockNumbers, ( self.hour / 10, self.hour % 10, self.minute / 10, self.minute % 10))
+        self.colon = CreateColon(context.getScreenSize(), self.second % 2 == 0)
         context.addDictForDisplay(self.numberDict)
+        context.addElemForDisplay(self.colon)
     def run(self):
         while True:
             now = time.localtime()
             hour = now.tm_hour
             minute = now.tm_min
             second = now.tm_sec
-            if(now, hour, minute, second) != (self.now, self.hour, self.minite, self.second)
+            self.colon.active = second % 2 == 0
+            if(hour, minute) != (self.hour, self.minute): #update time
+                self.hour = hour
+                self.minute = minute
+                tmp = self.numberDict.values()
+                tmp.sort(cmp = None, key = lambda x: x.name, reverse = False)
+                map(lambda x: x[0].changeValue(x[1]), zip(tmp, (self.hour / 10, self.hour % 10, self.minute / 10, self.minute % 10)))
 
 
     # def displayClock(self):

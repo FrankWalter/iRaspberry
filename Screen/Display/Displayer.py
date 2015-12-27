@@ -12,9 +12,9 @@ class Displayer(threading.Thread):
             pygame.display.flip()
 
     def displayAll(self):
+        self.screen.fill([255,255,255])
         if self.elems != None:
-            tmp = self.elems.values()
-            tmp.sort(cmp = None, key = lambda x: x.index, reverse = True)
+            tmp = map(lambda x: x[1], sorted(self.elems.iteritems(), key = lambda x: x[1].index, reverse = True))
             map(self.displayOne, tmp)
 
     def displayOne(self, elem):
@@ -26,8 +26,8 @@ class Displayer(threading.Thread):
                     print err
             self.screen.blit(elem.img, elem.location)
 
-    def addElem(self, key, value):
-        self.elems[key] = value
+    def addElem(self, elem):
+        self.elems[elem.name] = elem
 
     def removeElem(self, key):
         del self.elems[key]
