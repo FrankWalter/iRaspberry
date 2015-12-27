@@ -1,8 +1,9 @@
 import pygame
 from UIElement import UIElement
 class Button(UIElement):
-    def __init__(self, name, index, img, Location, width, height, active):
-        UIElement.__init__(self, name, index, img, Location, width, height, active)
+    def __init__(self, name, index, Location, width, height, active):
+        UIElement.__init__(self, name, index, Location, width, height, active)
+        self.img = None
     def cursorInsideButton(self, point):
         return self.rect.collidepoint(point[0], point[1])
     def loadImg(self):
@@ -13,7 +14,7 @@ def CreateButtonDict(screenSize, Funcs):
     width = screenSize[0] / 6
     height = screenSize[1] / 6
     return dict(map(lambda x:
-                    (x, Button(x, Funcs[x], None, getButtonLocation(screenSize, Funcs[x]), width, height, True))
+                    (x, Button(x, Funcs[x], getButtonLocation(screenSize, Funcs[x]), width, height, True))
                     , Funcs.keys()))
 
 def getButtonLocation(screenSize, buttonIndex):

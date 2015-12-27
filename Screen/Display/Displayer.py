@@ -1,5 +1,6 @@
 import pygame
 import threading
+from UIElements.TextItem import *
 class Displayer(threading.Thread):
     def __init__(self, context, elems):
         threading.Thread.__init__(self)
@@ -19,12 +20,15 @@ class Displayer(threading.Thread):
 
     def displayOne(self, elem):
         if elem.active == True:
-            if elem.img == None:
-                try:
-                    elem.loadImg()
-                except Exception as err:
-                    print err
-            self.screen.blit(elem.img, elem.location)
+            if not isinstance(elem, TextItem):
+                if elem.img == None:
+                    try:
+                        elem.loadImg()
+                    except Exception as err:
+                        print err
+                self.screen.blit(elem.img, elem.location)
+            else:
+                self.screen.blit(elem.text, elem.location)
 
     def addElem(self, elem):
         self.elems[elem.name] = elem

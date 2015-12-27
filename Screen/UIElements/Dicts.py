@@ -10,3 +10,4 @@ ClockNumberDict = {'ClockNum1': -1, 'ClockNum2': -2,
                    'ClockNum3': -3, 'ClockNum4': -4}
 
 ColonIndex = -5
+ScheduleIndex = {'Schedule1': -6, 'Schedule2': -7, 'Schedule3': -8, 'Schedule4': -9}
