@@ -15,9 +15,10 @@ class FuncHandler():
         self.buttonDict = CreateButtonDict(context.getScreenSize(), self.Funcs)
         context.addDictForDisplay(self.buttonDict)
         self.clockFunc = ClockFunc(self.context)
+        self.robotFunc = RobotFunc(self.context)
+
         self.clockFunc.start()
-        # self.backgroundDict = CreateBGDict(screen, self.Backgrounds)
-        # self.displayer.addDict(self.backgroundDict)
+   #     self.robotFunc.start()
 
 
 

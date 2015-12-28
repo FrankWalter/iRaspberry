@@ -26,5 +26,5 @@ def getTextLocation(screenSize, index):
     stepHori = screenWidth / 20
     stepVert = screenHeight / 20
 
-    if -6 <= index <= -9:
-        return [stepHori * 1, stepVert * (3 + -index)]
+    if -9 <= index <= -6:
+        return [stepHori * 3, stepVert * ( - index ) * 2]

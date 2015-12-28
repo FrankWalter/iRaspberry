@@ -4,7 +4,7 @@ from pprint import pprint
 
 city = ""
 apikey = ""
-weatherSet = {'sunny': 'sunny', 'cloudy': 'cloudy', 'overcast': 'overcast', 'rain': 'rain', 'snow': 'snow', 'fog': 'fog'}
+
 # input : 
 # output : string 
 # weather set : 

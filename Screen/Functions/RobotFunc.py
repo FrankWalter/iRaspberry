@@ -2,11 +2,14 @@ import Utils.voice
 from UIElements.Button import *
 from UIElements.Background import *
 from UIElements.Dicts import *
+import threading
 from Func import *
-class RobotFunc(Func):
+class RobotFunc(threading.Thread):
     Treats = TreatsButtonDict
     Faces = FacesBackgroundDict
     def __init__(self, context):
+        threading.Thread.__init__(self)
+        self.context = context
         self.facesDict = CreateBGDict(context.getScreenSize(), self.Faces)
         self.buttonDict = CreateButtonDict(context.getScreenSize(), self.Treats)
         context.addDictForDisplay(self.facesDict)

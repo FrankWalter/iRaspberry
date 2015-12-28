@@ -11,3 +11,4 @@ ClockNumberDict = {'ClockNum1': -1, 'ClockNum2': -2,
 
 ColonIndex = -5
 ScheduleIndex = {'Schedule1': -6, 'Schedule2': -7, 'Schedule3': -8, 'Schedule4': -9}
+WeatherIndex = {'sunny': -10, 'cloudy': -11, 'overcast': -12, 'rain': -13, 'snow': -14, 'fog': -15}
