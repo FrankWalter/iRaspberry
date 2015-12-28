@@ -7,7 +7,7 @@ import iContext
 from pygame.locals import *
 
 
-screenHight = 350
+screenHight = 295
 screenWidth = 475
 
 

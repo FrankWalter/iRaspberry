@@ -13,17 +13,17 @@ def getNews():
 	itemList = ElementTree.fromstring(content).find('channel').findall('item')
 	outputList = []
 	for item in itemList:
-		news = {}
-		news['title'] = item.find('title').text.encode('utf-8').strip()
-		news['link'] = item.find('link').text.encode('utf-8').strip()[43:]
-		news['pubDate'] = item.find('pubDate').text.encode('utf-8').strip()
-		outputList.append(news)
+		# news = {}
+		# news['title'] = item.find('title').text.encode('utf-8').strip()
+		# news['link'] = item.find('link').text.encode('utf-8').strip()[43:]
+		# news['pubDate'] = item.find('pubDate').text.encode('utf-8').strip()
+		outputList.append(item.find('title').text.encode('utf-8').strip())
+		outputList.append(item.find('link').text.encode('utf-8').strip()[43:])
+		outputList.append(item.find('pubDate').text.encode('utf-8').strip())
 
-	return outputList
+	# return map(lambda x: x['title'] + x['link'] + x['pubDate'], outputList[0: 5])
+	return outputList[0: 15]
 
 
-for news in getNews():
-	print news['title']
-	print news['link']
-	print news['pubDate']
-
+# for news in getNews():
+# 	print news

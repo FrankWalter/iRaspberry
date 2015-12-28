@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 import sys, urllib, urllib2, json, time
-from pprint import pprint
 
 city = ""
 apikey = ""
 
 # input : 
 # output : string 
-# weather set : 
-
+# weather set :
 def getWeather():
 	city = "shanghai"
 	apikey = "dda2c81ad20ca1e7b506c5696352a9e9"
@@ -20,15 +18,16 @@ def getWeather():
 	oRetData = oResp['retData']
 	weather = oRetData['weather'].encode('utf-8')
 	if "晴" in weather :
-		return weatherSet['sunny']
+		return 'sunny'
 	elif "雾" == weather:
-		return weatherSet['fog']
+		return 'fog'
 	elif "阴" == weather: 
-		return weatherSet['overcast']
+		return 'overcast'
 	elif "雨" in  weather: 
-		return weatherSet['rain']
+		return 'rain'
 	elif "雪" in weather: 
-		return weatherSet['snow']
+		return 'snow'
 	else:
-		return weatherSet["cloudy"]
+		return 'cloudy'
 
+print getWeather()
