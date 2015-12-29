@@ -29,7 +29,7 @@ class FuncHandler():
         self.functionPool['MusicFunc'] = self.musicFunc
         self.clockFunc.start()
 
-        self.swithTo('MusicFunc')
+        self.swithTo('RobotFunc')
     def swithTo(self, funcStr):
         map(lambda x: x.turnOffFunc(), self.functionPool.values())
         self.functionPool[funcStr].turnOnFunc()

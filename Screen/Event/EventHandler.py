@@ -14,14 +14,18 @@ def EventHandler(event, funcHdl):
                 if v.cursorInsideButton([event.pos[0], event.pos[1]]):
                     funcHdl.robotFunc.TreatRobot(k)
                     return
-        for k, v in funcHdl.musicFunc.songListDict.items():
-            if v.cursorInsideText([event.pos[0], event.pos[1]]):
-                funcHdl.musicFunc.upDateList(k)
-                return
+        if funcHdl.musicFunc.funcInUse:
+            for k, v in funcHdl.musicFunc.songListDict.items():
+                if v.cursorInsideText([event.pos[0], event.pos[1]]):
+                    funcHdl.musicFunc.upDateList(k)
+                    return
         for k, v in funcHdl.musicFunc.ctrButtonDict.items():
             if v.cursorInsideButton([event.pos[0], event.pos[1]]):
                 funcHdl.musicFunc.performAction(k)
                 return
+        if funcHdl.clockFunc.closeAlarmButton.cursorInsideButton([event.pos[0], event.pos[1]]):
+            funcHdl.clockFunc.closeAlarm()
+            return
     elif event.type == pygame.QUIT:
         pygame.quit()
         sys.exit()

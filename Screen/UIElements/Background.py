@@ -21,4 +21,9 @@ def CreateBGDict(screenSize, Bgs):
 def CreateBGOne(screenSize, name, index, active):
     width = screenSize[0]
     height = screenSize[1]
-    return Background(name, index, [0, 0], width, height, active)
+    stepHori = width / 20
+    stepVert = height / 20
+    if index != 17:
+        return Background(name, index, [0, 0], width, height, active)
+    else:
+        return Background(name, index, [stepHori * 3, stepVert * 6], width / 3, height / 3, active)

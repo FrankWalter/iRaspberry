@@ -1,6 +1,7 @@
 from UIElements.TextItem import *
 from UIElements.Dicts import *
 from UIElements.Button import *
+from UIElements.Background import *
 import threading
 import pygame
 class MusicFunc():
@@ -10,8 +11,10 @@ class MusicFunc():
         songNames = fileObj.readlines()
         self.songListDict = CreateTextDict(self.context.getScreenSize(), songNames, SongListDict, True)
         self.ctrButtonDict = CreateButtonDict(context.getScreenSize(), MusicControlButtonDict)
+        self.background = CreateBGOne(context.getScreenSize(), 'musicback', MusicBackground, True)
         self.context.addDictForDisplay(self.songListDict)
         self.context.addDictForDisplay(self.ctrButtonDict)
+        self.context.addElemForDisplay(self.background)
         self.songListTuples = map(lambda x: x, sorted(self.songListDict.iteritems(), key = lambda x: x[1].index, reverse = False))
         self.currentSongIndex = 0
         self.funcInUse = True
@@ -20,7 +23,7 @@ class MusicFunc():
         self.ctrButtonDict['pause'].active = False
         self.songListTuples[0][1].changeColorToRed()
     def loadMusic(self, musicStr):
-        pygame.mixer.music.load('Resources/voice/' + musicStr + '.mp3')
+        pygame.mixer.music.load('Resources/voice/' + musicStr + 'short.mp3')
 
     def setElemInactive(self, elem):
         elem.active = False
@@ -31,12 +34,17 @@ class MusicFunc():
     def turnOffFunc(self):
         self.funcInUse = False
         map(lambda x: self.setElemInactive(x) ,self.songListDict.values() + self.ctrButtonDict.values())
+        self.background.active = False
+        pygame.mixer.music.stop()
 
     def turnOnFunc(self):
         self.funcInUse = True
         map(lambda x: self.setElemActive(x) ,self.songListDict.values() + self.ctrButtonDict.values())
         self.ctrButtonDict['play'].active = False
         self.ctrButtonDict['pause'].active = True
+        self.background.active = True
+        self.loadMusic('yellow')
+        pygame.time.wait(100)
         pygame.mixer.music.play()
 
     def upDateList(self, key):
@@ -46,9 +54,10 @@ class MusicFunc():
             if self.songListTuples[i][0] == key:
                 self.currentSongIndex = i
                 break
-        
         pygame.mixer.music.fadeout(10)
+        pygame.time.wait(100)
         self.loadMusic(self.songListDict[key].textStr[2: -1])
+        pygame.time.wait(100)
         pygame.mixer.music.play()
 
     def performAction(self, k):

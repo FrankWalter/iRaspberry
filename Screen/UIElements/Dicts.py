@@ -11,6 +11,7 @@ MusicControlButtonDict = { 'pause': 14, 'next': 15, 'play': 14}
 
 SongName = 16
 
+MusicBackground = 17
 SongListDict = { 'Song1': 50, 'Song2': 51, 'Song3': 52, 'Song4': 53, 'Song5': 54}
 
 WeatherIndex = {'sunny': 107, 'cloudy': 106, 'overcast': 105, 'rain': 104, 'snow': 103, 'fog': 102}
@@ -19,6 +20,7 @@ FacesBackgroundDict = {'threaten': 200, 'angry': 201, 'contempt':202,
          'shy': 203, 'cute': 204, 'crafty': 205,
          'smile': 206, 'smile2': 207, 'love': 208}
 
+CloseAlarm = -4
 ColonIndex = -5
 
 ScheduleIndex = {'Schedule1': -6, 'Schedule2': -7, 'Schedule3': -8, 'Schedule4': -9}

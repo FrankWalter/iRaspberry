@@ -2,12 +2,11 @@ import Utils.voice
 from UIElements.Button import *
 from UIElements.Background import *
 from UIElements.Dicts import *
-import threading
-class RobotFunc(threading.Thread):
+import pygame
+class RobotFunc():
     Treats = TreatsButtonDict
     Faces = FacesBackgroundDict
     def __init__(self, context):
-        threading.Thread.__init__(self)
         self.context = context
         self.facesDict = CreateBGDict(context.getScreenSize(), self.Faces)
         self.buttonDict = CreateButtonDict(context.getScreenSize(), self.Treats)
@@ -32,14 +31,23 @@ class RobotFunc(threading.Thread):
         elif treat == 'Punish':
             self.punishMe()
     def feedMe(self):
+        if not pygame.mixer.music.get_busy():
+            pygame.mixer.music.load("Resources/voice/feed.mp3")
+            pygame.mixer.music.play(1)
         self.infoDict['Starving'] += 2
         self.moodCalculate()
 
     def petMe(self):
+        if not pygame.mixer.music.get_busy():
+            pygame.mixer.music.load("Resources/voice/pet.mp3")
+            pygame.mixer.music.play(1)
         self.infoDict['Happy'] += 1
         self.moodCalculate()
 
     def punishMe(self):
+        if not pygame.mixer.music.get_busy():
+            pygame.mixer.music.load("Resources/voice/punish.mp3")
+            pygame.mixer.music.play(1)
         self.infoDict['Happy'] -= 3
         self.moodCalculate()
 
@@ -86,7 +94,6 @@ class RobotFunc(threading.Thread):
 
         map(lambda x: self.setElemInactive(x) ,self.facesDict.values())
         self.facesDict[self.mood].active = True
-        print self.infoDict['Hp']
 
 
 

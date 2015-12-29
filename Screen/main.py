@@ -1,9 +1,10 @@
-# coding=utf8
+#coding=utf8
 import pygame
 import os
 import thread
 import Event.EventListener
 import iContext
+
 from pygame.locals import *
 
 
@@ -13,7 +14,9 @@ screenWidth = 475
 
 if __name__=='__main__':
     pygame.init()
+    pygame.mixer.init()
     context = iContext.iContext()
+
     screen = context.createScreen(screenWidth, screenHight)
     # create a displayer for displaying
     displayer = context.createDisplayer()
@@ -24,7 +27,3 @@ if __name__=='__main__':
         thread.start_new_thread(Event.EventListener.EventListener(context), ())
     except Exception as err:
         print err
-
-
-    #rob.speak("肥料掺了金坷垃一带能顶两袋撒")
-

@@ -16,7 +16,10 @@ def CreateButtonDict(screenSize, Funcs):
     return dict(map(lambda x:
                     (x, Button(x, Funcs[x], getButtonLocation(screenSize, Funcs[x]), getButtonSize(screenSize, Funcs[x])[0], getButtonSize(screenSize, Funcs[x])[1], True))
                     , Funcs.keys()))
-
+def CreateButtonOne(screenSize, name, index, active):
+    width = screenSize[0] / 6
+    height = screenSize[1] / 6
+    return Button(name, index, getButtonLocation(screenSize, index), width, height, active)
 def getButtonLocation(screenSize, buttonIndex):
     screenWidth = screenSize[0]
     screenHeight = screenSize[1]
@@ -26,8 +29,10 @@ def getButtonLocation(screenSize, buttonIndex):
         return [stepHori * (1 + (buttonIndex - 3) * 4), stepVert * 1]
     elif 0 <= buttonIndex <= 2:#treatbutton
         return [stepHori * (3 + buttonIndex * 5), stepVert * 17]
-    elif 14 <= buttonIndex <= 15:
+    elif 14 <= buttonIndex <= 15: #music control
         return [stepHori * (3 + (buttonIndex - 14) * 3), stepVert * 17]
+    elif -4 == buttonIndex:
+        return [stepHori * 15, stepVert * 15]
 
 def getButtonSize(screenSize, buttonIndex):
     if 3 <= buttonIndex <= 7: #functionbutton

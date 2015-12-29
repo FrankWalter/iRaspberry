@@ -7,7 +7,7 @@ sys.setdefaultencoding('utf-8')
 class TextItem(UIElement):
     def __init__(self, name, index, Location, active, textStr, textFontSize):
         UIElement.__init__(self, name, index, Location, 0, 0, active)
-        self.textFont = pygame.font.SysFont('宋体',textFontSize)
+        self.textFont = pygame.font.SysFont('simsun',textFontSize)
         self.textStr = textStr
         self.text = self.textFont.render(textStr.decode(), True, (10, 10, 10))
         self.rect = pygame.Rect(Location[0], Location[1], textFontSize * 4, textFontSize)
