@@ -21,16 +21,16 @@ class FuncHandler():
         self.robotFunc = RobotFunc(self.context)
         self.weatherFunc = WeatherFunc(self.context)
         self.newsFunc = NewsFunc(self.context)
-
+        self.musicFunc = MusicFunc(self.context)
         self.functionPool['ClockFunc'] = self.clockFunc
         self.functionPool['RobotFunc'] = self.robotFunc
         self.functionPool['WeatherFunc'] = self.weatherFunc
         self.functionPool['NewsFunc'] = self.newsFunc
+        self.functionPool['MusicFunc'] = self.musicFunc
         self.clockFunc.start()
 
-        self.swithTo('RobotFunc')
+        self.swithTo('MusicFunc')
     def swithTo(self, funcStr):
         map(lambda x: x.turnOffFunc(), self.functionPool.values())
-        print 'turn on' + funcStr
         self.functionPool[funcStr].turnOnFunc()
    #     self.robotFunc.start()

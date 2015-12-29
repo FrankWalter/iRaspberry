@@ -29,5 +29,3 @@ def getWeather():
 		return 'snow'
 	else:
 		return 'cloudy'
-
-print getWeather()

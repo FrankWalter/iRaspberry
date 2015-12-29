@@ -6,11 +6,22 @@ def EventHandler(event, funcHdl):
         # check if it's a Func switching command
         for k, v in funcHdl.buttonDict.items():
             if v.cursorInsideButton([event.pos[0], event.pos[1]]):
-                # print k
                 funcHdl.swithTo(k)
-        # for k, v in funcHdl.robotFunc.buttonDict.items():
-        #     if v.cursorInsideButton([event.pos[0], event.pos[1]]):
-        #         print k
+                return
+        # checking for robot function
+        if funcHdl.robotFunc.funcInUse:
+            for k, v in funcHdl.robotFunc.buttonDict.items():
+                if v.cursorInsideButton([event.pos[0], event.pos[1]]):
+                    funcHdl.robotFunc.TreatRobot(k)
+                    return
+        for k, v in funcHdl.musicFunc.songListDict.items():
+            if v.cursorInsideText([event.pos[0], event.pos[1]]):
+                funcHdl.musicFunc.upDateList(k)
+                return
+        for k, v in funcHdl.musicFunc.ctrButtonDict.items():
+            if v.cursorInsideButton([event.pos[0], event.pos[1]]):
+                funcHdl.musicFunc.performAction(k)
+                return
     elif event.type == pygame.QUIT:
         pygame.quit()
         sys.exit()

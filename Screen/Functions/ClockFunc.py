@@ -1,11 +1,11 @@
 import time
+import urllib2
 from UIElements.ClockNumber import *
 from UIElements.TextItem import *
 from UIElements.Dicts import *
 import threading
 import pygame
 class ClockFunc(threading.Thread):
-    ISOTIMEFORMAT="%Y-%m-%d %X"
     ClockNumbers = ClockNumberDict
     def __init__(self, context):
         threading.Thread.__init__(self)
@@ -23,8 +23,10 @@ class ClockFunc(threading.Thread):
                                                 ( self.hour / 10, self.hour % 10, self.minute / 10, self.minute % 10, self.second / 10, self.second % 10))
         self.colon = CreateColon(self.context.getScreenSize(), False)
 
-        fileObj = open('Resources/database/schedule/%d-%d-%d.txt'%(self.year, self.mon, self.day))
-        fileLines = fileObj.readlines()
+        req = urllib2.Request('http://4c.rokiy.com/%d-%d-%d.txt'%(self.year, self.mon, self.day))
+        resp = urllib2.urlopen(req)
+        content = resp.read()
+        fileLines = content.split('\n')
         self.scheduleText = CreateTextDict(self.context.getScreenSize(), fileLines, ScheduleIndex, True)
 
         self.context.addDictForDisplay(self.numberDict)
